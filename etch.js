@@ -57,27 +57,25 @@ function updateNumSquares(size) {
     const newNumSquares = size ** 2;
     const diff = newNumSquares - numSquares;
 
-    diff >= 0 ? addSquares(diff, size) : delSquares(Math.abs(diff), numSquares);
+    diff >= 0 ? addSquares(diff, size) : delSquares(Math.abs(diff), size);
 }
 
-function addSquares(numSquares, oldSize) {
+function addSquares(numSquares, size) {
     const sketchContainer = document.querySelector("#sketch-container");
-    resizeGrid(oldSize + numSquares);
+    resizeGrid(size);
     for (let i = 0; i < numSquares; i++) {
         const square = document.createElement("div");
-        formatSquare(square, oldSize + numSquares);
+        formatSquare(square, size);
         sketchContainer.appendChild(square);
     }
 }
 
-function delSquares(numSquares, oldSize) {
+function delSquares(numSquares, size) {
     const sketchContainer = document.querySelector("#sketch-container");
-    console.log("got here");
     for (let i = 0; i < numSquares; i++) {
         sketchContainer.removeChild(sketchContainer.lastChild);
     }
-    console.log(oldSize - numSquares);
-    resizeGrid(oldSize - numSquares);
+    resizeGrid(size);
 }
 
 function getSizeInput(event) {
